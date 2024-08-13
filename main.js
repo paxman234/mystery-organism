@@ -52,15 +52,14 @@ const pAequorFactory = (specimenNum, dna) => {
       }
     },
     mutate() {
-      let dna = this._dna;
       const indexDnaBase = Math.floor(Math.random() * 14);
-      let randomDnaBase = dna[indexDnaBase];
+      let randomDnaBase = this._dna[indexDnaBase];
       let newDnaBase = returnRandBase();
       while(newDnaBase === randomDnaBase) {
         newDnaBase = returnRandBase();
       }
-      const mutatedDna = dna.splice(indexDnaBase, 1, newDnaBase);
-      return mutatedDna;
+      this._dna.splice(indexDnaBase, 1, newDnaBase);
+      return this._dna;
     },
   
     compareDna(pAequor) {
@@ -101,10 +100,12 @@ let survivalSpecimens = [];
 let currentStrand = [];
 let specNum = 1;
 // const currentStrand = mockUpStrand;
+let mutatedSpecimen = [];
 while(survivalSpecimens.length < 30) {
   currentStrand = mockUpStrand();
-  console.log(currentStrand.length);
+  // console.log(currentStrand.length);
   const currentSpecimen = pAequorFactory(specNum, currentStrand);
+  mutatedSpecimen = currentSpecimen.mutate();
   const survivability = currentSpecimen.willLikelySurvive();
   if(survivability) {
     survivalSpecimens.push(currentSpecimen);
@@ -117,7 +118,7 @@ while(survivalSpecimens.length < 30) {
 }
 console.log(specNum);
 console.log(survivalSpecimens.length);
-console.log(otherSpecimen.lengthecNum);
+console.log(otherSpecimen.length);
 
 
 
