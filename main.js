@@ -28,7 +28,7 @@ const pAequorFactory = (specimenNum, dna) => {
     },
     set specimenNum(specimenNum) {
       if(typeof specimenNum === 'number') {
-        this._specimenNum = specimenNum;
+        return this._specimenNum = specimenNum;
       }
       else {
         return 'Pass a unique number above 0';
@@ -45,10 +45,10 @@ const pAequorFactory = (specimenNum, dna) => {
     },
     set dna(dna) {
       if(Array.isArray(dna)) {
-        this._dna = dna;
+        return this._dna = dna;
       }
       else {
-        console.log('Make sure DNA data is of correct type.');
+        return 'Make sure DNA data is of correct type.';
       }
     },
     mutate() {
