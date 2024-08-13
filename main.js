@@ -75,7 +75,7 @@ const pAequorFactory = (specimenNum, dna) => {
         }
       }
       percentage=100/15 * match_count;
-      return `specimen #${this.specimenNum} and specimen #2 have ${percentage}% DNA in common`;
+      return `specimen #${this.specimenNum} and specimen #${pAequor.specimenNum} have ${percentage}% DNA in common`;
     },
   
     willLikelySurvive() {
@@ -114,9 +114,15 @@ while(survivalSpecimens.length < 30) {
   specNum ++;
 
 }
+
 const specimen15 = survivalSpecimens[14];
 let specimen4 = {};
 specimen4 = survivalSpecimens[3];
+//mutate tests
+console.log(specimen4);
+specimen4.mutate();
+console.log(specimen4);
+
 const percentComp = specimen15.compareDna(specimen4);
 console.log(percentComp);
 console.log(specNum);
