@@ -115,7 +115,8 @@ while(survivalSpecimens.length < 30) {
 
 }
 const specimen15 = survivalSpecimens[14];
-const specimen4 = survivalSpecimens[3];
+let specimen4 = {};
+specimen4 = survivalSpecimens[3];
 const percentComp = specimen15.compareDna(specimen4);
 console.log(percentComp);
 console.log(specNum);
