@@ -67,7 +67,7 @@ const pAequorFactory = (specimenNum, dna) => {
       let match_count = 0;
       let difference_count = 0;
       for (let i = 0; i < 15; i++) {
-        if(this.dna[i] === pAequor.dna[j]) {
+        if(this.dna[i] === pAequor.dna[i]) {
           match_count++;
         }
         else {
