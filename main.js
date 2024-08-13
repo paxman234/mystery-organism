@@ -13,7 +13,20 @@ const mockUpStrand = () => {
   return newStrand;
 };
 
+const pAequorFactory = (specimenNum, dna) => {
+  
 
+  function mutate() {
+    let randomDnaBase = dna[Math.floor(Math.random() * 14)];
+    const indexDnaBase = dna.indexOf(randomDnaBase);
+    let newDnaBase = returnRandBase();
+    while(newDnaBase === randomDnaBase) {
+      newDnaBase = returnRandBase();
+    }
+    const mutatedDna = dna.splice(indexDnaBase, 1, newDnaBase);
+    return mutatedDna;
+  };
+} 
 
 
 
