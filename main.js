@@ -67,13 +67,11 @@ const pAequorFactory = (specimenNum, dna) => {
       let match_count = 0;
       let difference_count = 0;
       for (let i = 0; i < 15; i++) {
-        for(let j = 0; j < 15; j++) {
-          if(this.dna[i] === pAequor.dna[j]) {
-            match_count++;
-          }
-          else {
-            difference_count++;
-          }
+        if(this.dna[i] === pAequor.dna[j]) {
+          match_count++;
+        }
+        else {
+          difference_count++;
         }
       }
       percentage=100/15 * match_count;
@@ -105,7 +103,7 @@ while(survivalSpecimens.length < 30) {
   currentStrand = mockUpStrand();
   // console.log(currentStrand.length);
   const currentSpecimen = pAequorFactory(specNum, currentStrand);
-  mutatedSpecimen = currentSpecimen.mutate();
+  // mutatedSpecimen = currentSpecimen.mutate();
   const survivability = currentSpecimen.willLikelySurvive();
   if(survivability) {
     survivalSpecimens.push(currentSpecimen);
@@ -116,6 +114,10 @@ while(survivalSpecimens.length < 30) {
   specNum ++;
 
 }
+const specimen15 = survivalSpecimens[14];
+const specimen4 = survivalSpecimens[3];
+const percentComp = specimen15.compareDna(specimen4);
+console.log(percentComp);
 console.log(specNum);
 console.log(survivalSpecimens.length);
 console.log(otherSpecimen.length);
