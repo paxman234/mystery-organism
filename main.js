@@ -16,6 +16,8 @@ const mockUpStrand = () => {
 const pAequorFactory = (specimenNum, dna) => {
   return {
     //specimen properties
+    _specimenNum: specimenNum,
+    _dna: dna,
     get specimenNum() {
       if(typeof this._specimenNum === 'number') {
         return this._specimenNum;
@@ -50,8 +52,9 @@ const pAequorFactory = (specimenNum, dna) => {
       }
     },
     mutate() {
+      let dna = this._dna;
       const indexDnaBase = Math.floor(Math.random() * 14);
-      let randomDnaBase = this.dna[indexDnaBase];
+      let randomDnaBase = dna[indexDnaBase];
       let newDnaBase = returnRandBase();
       while(newDnaBase === randomDnaBase) {
         newDnaBase = returnRandBase();
@@ -60,7 +63,7 @@ const pAequorFactory = (specimenNum, dna) => {
       return mutatedDna;
     },
   
-    compareDna (pAequor) {
+    compareDna(pAequor) {
       let percentage = 0;
       let match_count = 0;
       let difference_count = 0;
@@ -81,7 +84,7 @@ const pAequorFactory = (specimenNum, dna) => {
     willLikelySurvive() {
       let cOrGBases_count = 0;
       const survivalNumber = 9;
-      for (const dnaBase of dna) {
+      for (const dnaBase of this.dna) {
         if(dnaBase === 'C' || dnaBase === 'G') {
           cOrGBases_count++;
         }
@@ -95,10 +98,12 @@ const pAequorFactory = (specimenNum, dna) => {
 //testing
 let otherSpecimen = [];
 let survivalSpecimens = [];
+let currentStrand = [];
 let specNum = 1;
 // const currentStrand = mockUpStrand;
 while(survivalSpecimens.length < 30) {
-  const currentStrand = mockUpStrand;
+  currentStrand = mockUpStrand();
+  console.log(currentStrand.length);
   const currentSpecimen = pAequorFactory(specNum, currentStrand);
   const survivability = currentSpecimen.willLikelySurvive();
   if(survivability) {
