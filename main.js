@@ -15,8 +15,40 @@ const mockUpStrand = () => {
 
 const pAequorFactory = (specimenNum, dna) => {
   return {
-    specimenNum: specimenNum,
-    dna: dna,
+    //specimen properties
+    get specimenNum() {
+      if(typeof this._specimenNum === 'number') {
+        return this._specimenNum;
+      }
+      else {
+        return 'spec type error.';
+      }
+    },
+    set specimenNum(specimenNum) {
+      if(typeof specimenNum === 'number') {
+        this._specimenNum = specimenNum;
+      }
+      else {
+        return 'Pass a unique number above 0';
+      }
+    },
+    //dna properties
+    get dna(){
+      if(Array.isArray(this._dna)) {
+        return this._dna;
+      }
+      else {
+        return `dna for specimen #${this._specimenNum} not retrievable.`
+      }
+    },
+    set dna(dna) {
+      if(Array.isArray(dna)) {
+        this._dna = dna;
+      }
+      else {
+        console.log('Make sure DNA data is of correct type.');
+      }
+    },
     mutate() {
       const indexDnaBase = Math.floor(Math.random() * 14);
       let randomDnaBase = this.dna[indexDnaBase];
@@ -24,8 +56,8 @@ const pAequorFactory = (specimenNum, dna) => {
       while(newDnaBase === randomDnaBase) {
         newDnaBase = returnRandBase();
       }
-      const mutatedDna = this.dna.splice(indexDnaBase, 1, newDnaBase);
-      mutatedDna;
+      const mutatedDna = dna.splice(indexDnaBase, 1, newDnaBase);
+      return mutatedDna;
     },
   
     compareDna (pAequor) {
@@ -43,7 +75,7 @@ const pAequorFactory = (specimenNum, dna) => {
         }
       }
       percentage=100/15 * match_count;
-      return `specimen #${specimenNum} and specimen #2 have ${percentage}% DNA in common`;
+      return `specimen #${this.specimenNum} and specimen #2 have ${percentage}% DNA in common`;
     },
   
     willLikelySurvive() {
@@ -60,6 +92,7 @@ const pAequorFactory = (specimenNum, dna) => {
 
 } 
 
+//testing
 let otherSpecimen = [];
 let survivalSpecimens = [];
 let specNum = 1;
