@@ -125,38 +125,38 @@ while(survivalSpecimens.length < 30) {
 
 const mostRelated = (index1=0) => {
   //obj
-  const specimenX = survivalSpecimens[index1];
+  let specimenX = survivalSpecimens[index1];
   //var
   let biggestIntPercentage = 0;
   let most_related = [];
   //Find largest match
-  for(let i=0; i<survivalSpecimens.length; i++) {
-    if(i===index1){
-      continue;
-    }
-    let percentageComp = specimenX.compareDna(survivalSpecimens[i]);
-    if(percentageComp.includes('have 100% DNA in common')) {
-      most_related.unshift([specimenX._specimenNum, survivalSpecimens[i]._specimenNum,100]);
-    }
-    else {
-      const modIndex = percentageComp.indexOf('%');
-      if(modIndex === null || modIndex === 0) {
-        console.log('error detected');
-        break;
+  for(let i=index1; i<survivalSpecimens.length; i++) {
+    for(let j=0; j<survivalSpecimens.length; j++) {
+      if(j===i){
+        continue;
       }
-      let percentString = percentageComp.slice(modIndex-2, modIndex);
-      const intPercentage = parseInt(percentString);
-      if(intPercentage >=  biggestIntPercentage) {
-        if(intPercentage === biggestIntPercentage) {
-          most_related.push([specimenX._specimenNum, survivalSpecimens[i]._specimenNum, intPercentage]);
+      specimenX = survivalSpecimens[i];
+      let percentageComp = specimenX.compareDna(survivalSpecimens[j]);
+      if(percentageComp.includes('have 100% DNA in common')) {
+        most_related.unshift([specimenX._specimenNum, survivalSpecimens[j]._specimenNum,100]);
+      }
+      else {
+        const modIndex = percentageComp.indexOf('%');
+        if(modIndex === null || modIndex === 0) {
+          console.log('error detected');
+          break;
         }
-        else {
-          biggestIntPercentage = intPercentage;
-          most_related.unshift([specimenX._specimenNum, survivalSpecimens[i]._specimenNum, intPercentage]);
+        let percentString = percentageComp.slice(modIndex-2, modIndex);
+        const intPercentage = parseInt(percentString);
+        if(intPercentage >=  biggestIntPercentage) 
+        {
+          const arrayX =[specimenX._specimenNum, survivalSpecimens[j]._specimenNum, intPercentage];
+          intPercentage === biggestIntPercentage ? most_related.push(arrayX) : most_related.unshift(arrayX); 
         }
       }
     }
   }
+
   return most_related;
 }
 
