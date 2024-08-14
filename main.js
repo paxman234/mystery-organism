@@ -148,10 +148,11 @@ const mostRelated = (index1=0) => {
         }
         let percentString = percentageComp.slice(modIndex-2, modIndex);
         const intPercentage = parseInt(percentString);
-        if(intPercentage >=  biggestIntPercentage) 
+        if(intPercentage >= biggestIntPercentage) 
         {
           const arrayX =[specimenX._specimenNum, survivalSpecimens[j]._specimenNum, intPercentage];
-          intPercentage === biggestIntPercentage ? most_related.push(arrayX) : most_related.unshift(arrayX); 
+          (intPercentage === biggestIntPercentage) ? most_related.push(arrayX) : 
+          (biggestIntPercentage = intPercentage, most_related.unshift(arrayX)); 
         }
       }
     }
