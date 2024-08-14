@@ -66,14 +66,14 @@ const pAequorFactory = (specimenNum, dna) => {
     compareDna(pAequor) {
       let percentage = 0;
       let match_count = 0;
-      let difference_count = 0;
+      // let difference_count = 0;
       for (let i = 0; i < 15; i++) {
         if(this.dna[i] === pAequor.dna[i]) {
           match_count++;
         }
-        else {
-          difference_count++;
-        }
+        // else {
+        //   difference_count++;
+        // }
       }
       percentage=100/15 * match_count;
       return `specimen #${this.specimenNum} and specimen #${pAequor.specimenNum} have ${Math.floor(percentage)}% DNA in common`;
@@ -99,7 +99,7 @@ let otherSpecimen = [];
 let survivalSpecimens = [];
 let currentStrand = [];
 let specNum = 1;
-let mutatedSpecimen = [];
+// let mutatedSpecimen = [];
 while(survivalSpecimens.length < 30) {
   currentStrand = mockUpStrand();
   const currentSpecimen = pAequorFactory(specNum, currentStrand);
@@ -130,10 +130,13 @@ const mostRelated = (index1=0) => {
   let biggestIntPercentage = 0;
   let most_related = [];
   //Find largest match
-  for(i=1; i<survivalSpecimens.length; i++) {
+  for(let i=0; i<survivalSpecimens.length; i++) {
+    if(i===index1){
+      continue;
+    }
     let percentageComp = specimenX.compareDna(survivalSpecimens[i]);
     if(percentageComp.includes('have 100% DNA in common')) {
-      return percentageComp
+      most_related.unshift([specimenX._specimenNum, survivalSpecimens[i]._specimenNum,100]);
     }
     else {
       const modIndex = percentageComp.indexOf('%');
@@ -158,11 +161,8 @@ const mostRelated = (index1=0) => {
 }
 
 //console calls
-console.log(mostRelated(index));
+console.log(mostRelated());
 //console.log(percentComp);
 console.log(specNum);
 console.log(survivalSpecimens.length);
 console.log(otherSpecimen.length);
-
-
-
