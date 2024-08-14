@@ -51,6 +51,7 @@ const pAequorFactory = (specimenNum, dna) => {
         return 'Make sure DNA data is of correct type.';
       }
     },
+    //specimen methods.
     mutate() {
       const indexDnaBase = Math.floor(Math.random() * 14);
       let randomDnaBase = this._dna[indexDnaBase];
@@ -93,6 +94,7 @@ const pAequorFactory = (specimenNum, dna) => {
 } 
 
 //testing
+//generate 30 specimens that will survive.
 let otherSpecimen = [];
 let survivalSpecimens = [];
 let currentStrand = [];
@@ -109,46 +111,55 @@ while(survivalSpecimens.length < 30) {
     otherSpecimen.push(currentSpecimen);
   }
   specNum ++;
-
 }
 
-const specimen15 = survivalSpecimens[0];
-let specimen4 = {};
-specimen4 = survivalSpecimens[3];
-//mutate tests
-// console.log(specimen4);
-// specimen4.mutate();
-// console.log(specimen4);
-let biggestIntPercentage = 0;
-let most_related = [];
-const percentComp = specimen15.compareDna(specimen4);
-for(i=1; i<survivalSpecimens.length; i++) {
-  let percentageComp = specimen15.compareDna(survivalSpecimens[i]);
-  if(percentageComp.includes('have 100% DNA in common')) {
-    return percentageComp
-  }
-  else {
-    const modIndex = percentageComp.indexOf('%');
-    if(modIndex === null || modIndex === 0) {
-      console.log('error detected');
-      break;
-    }
-    let percentString = percentageComp.slice(modIndex-2, modIndex);
-    const intPercentage = parseInt(percentString);
-    if(intPercentage >=  biggestIntPercentage) {
-      if(intPercentage === biggestIntPercentage) {
-        most_related.push([specimen15._specimenNum, survivalSpecimens[i]._specimenNum, intPercentage]);
-      }
-      else {
-        biggestIntPercentage = intPercentage;
-        most_related.unshift([specimen15._specimenNum, survivalSpecimens[i]._specimenNum, intPercentage]);
-      }
+//compare tests
+  // let specimen4 = {};
+  // specimen4 = survivalSpecimens[3];
+  // const percentComp = specimenX.compareDna(specimen4);
 
+// mutate tests
+  // console.log(specimen4);
+  // specimen4.mutate();
+  // console.log(specimen4);
+
+const mostRelated = (index1=0) => {
+  //obj
+  const specimenX = survivalSpecimens[index1];
+  //var
+  let biggestIntPercentage = 0;
+  let most_related = [];
+  //Find largest match
+  for(i=1; i<survivalSpecimens.length; i++) {
+    let percentageComp = specimenX.compareDna(survivalSpecimens[i]);
+    if(percentageComp.includes('have 100% DNA in common')) {
+      return percentageComp
+    }
+    else {
+      const modIndex = percentageComp.indexOf('%');
+      if(modIndex === null || modIndex === 0) {
+        console.log('error detected');
+        break;
+      }
+      let percentString = percentageComp.slice(modIndex-2, modIndex);
+      const intPercentage = parseInt(percentString);
+      if(intPercentage >=  biggestIntPercentage) {
+        if(intPercentage === biggestIntPercentage) {
+          most_related.push([specimenX._specimenNum, survivalSpecimens[i]._specimenNum, intPercentage]);
+        }
+        else {
+          biggestIntPercentage = intPercentage;
+          most_related.unshift([specimenX._specimenNum, survivalSpecimens[i]._specimenNum, intPercentage]);
+        }
+      }
     }
   }
+  return most_related;
 }
-console.log(most_related);
-console.log(percentComp);
+
+//console calls
+console.log(mostRelated(index));
+//console.log(percentComp);
 console.log(specNum);
 console.log(survivalSpecimens.length);
 console.log(otherSpecimen.length);
