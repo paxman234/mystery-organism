@@ -97,13 +97,10 @@ let otherSpecimen = [];
 let survivalSpecimens = [];
 let currentStrand = [];
 let specNum = 1;
-// const currentStrand = mockUpStrand;
 let mutatedSpecimen = [];
 while(survivalSpecimens.length < 30) {
   currentStrand = mockUpStrand();
-  // console.log(currentStrand.length);
   const currentSpecimen = pAequorFactory(specNum, currentStrand);
-  // mutatedSpecimen = currentSpecimen.mutate();
   const survivability = currentSpecimen.willLikelySurvive();
   if(survivability) {
     survivalSpecimens.push(currentSpecimen);
@@ -130,15 +127,6 @@ for(i=1; i<survivalSpecimens.length; i++) {
   if(percentageComp.includes('have 100% DNA in common')) {
     return percentageComp
   }
-  // else if(percentageComp.includes('have 93% DNA in common')) {
-  //   return percentageComp
-  // }
-  // else if(percentageComp.includes('have 86% DNA in common')) {
-  //   return percentageComp
-  // }
-  // else if(percentageComp.includes('have 80% DNA in common')) {
-  //     return percentageComp
-  // }
   else {
     const modIndex = percentageComp.indexOf('%');
     if(modIndex === null || modIndex === 0) {
