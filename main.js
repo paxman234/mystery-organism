@@ -122,7 +122,7 @@ while(survivalSpecimens.length < 30) {
   // console.log(specimen4);
   // specimen4.mutate();
   // console.log(specimen4);
-
+//most related function
 const mostRelated = (index1=0) => {
   //obj
   let specimenX = survivalSpecimens[index1];
