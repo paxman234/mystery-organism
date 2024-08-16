@@ -54,11 +54,30 @@ const pAequorFactory = (specimenNum, dna) => {
     },
 
     complementStrand() {
-
+      strand1 = this.dna.values();
+      strand2 = [];
+      for(const value of strand1) {
+        switch(value) {
+          case 'A':
+            strand2.push('T');
+            break;
+          case 'T':
+            strand2.push('A');
+            break;
+          case 'C':
+            strand2.push('G');
+            break;
+          case 'G':
+            strand2.push('C');
+            break;
+          default:
+        }
+      }
+      return strand2;
     }
   }
+}
 
-} 
 
 //testing
 //generate 30 specimens that will survive.
@@ -87,6 +106,11 @@ while(survivalSpecimens.length < 30) {
   // console.log(specimen4);
   // specimen4.mutate();
   // console.log(specimen4);
+//complement strand test
+let specimen4 = survivalSpecimens[3];
+const complementaryArray = specimen4.complementStrand();
+console.log(complementaryArray);
+
 //most related function
 const mostRelated = (index1=0) => {
   //obj
@@ -156,8 +180,8 @@ const mostRelated = (index1=0) => {
   // }
 // }
 //console calls
-console.log(most_related);
-// console.log(mostRelated());
+// console.log(most_related);
+console.log(mostRelated());
 //console.log(percentComp);
 console.log(specNum);
 console.log(survivalSpecimens.length);
