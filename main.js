@@ -80,8 +80,7 @@ while(survivalSpecimens.length < 30) {
 }
 
 //compare tests
-  // let specimen4 = {};
-  // specimen4 = survivalSpecimens[3];
+  // let specimen4 = survivalSpecimens[3];
   // const percentComp = specimenX.compareDna(specimen4);
 
 // mutate tests
@@ -104,7 +103,7 @@ const mostRelated = (index1=0) => {
       specimenX = survivalSpecimens[i];
       let percentageComp = specimenX.compareDna(survivalSpecimens[j]);
       if(percentageComp.includes('have 100% DNA in common')) {
-        most_related.unshift([specimenX._specimenNum, survivalSpecimens[j]._specimenNum,100]);
+        most_related.unshift([specimenX.specimenNum, survivalSpecimens[j].specimenNum,100]);
       }
       else {
         const modIndex = percentageComp.indexOf('%');
@@ -116,7 +115,7 @@ const mostRelated = (index1=0) => {
         const intPercentage = parseInt(percentString);
         if(intPercentage >= biggestIntPercentage) 
         {
-          const arrayX =[specimenX._specimenNum, survivalSpecimens[j]._specimenNum, intPercentage];
+          const arrayX =[specimenX.specimenNum, survivalSpecimens[j].specimenNum, intPercentage];
           (intPercentage === biggestIntPercentage) ? most_related.push(arrayX) : 
           (biggestIntPercentage = intPercentage, most_related.unshift(arrayX)); 
         }
@@ -127,8 +126,38 @@ const mostRelated = (index1=0) => {
   return most_related;
 }
 
+//alt mostRelated
+// let biggestIntPercentage = 0;
+// let most_related = [];
+// for(const pAequor of survivalSpecimens) {
+  // for(const speciman of survivalSpecimens) {
+  //   if(speciman.specimenNum === pAequor.specimenNum || speciman.specimenNum < pAequor.specimenNum) {
+  //     continue;
+  //   }
+  //   let percentageComp = pAequor.compareDna(speciman);
+  //   if(percentageComp.includes('have 100% DNA in common')) {
+  //     most_related.unshift([pAequor.specimenNum, speciman.specimenNum,100]);
+  //   }
+  //   else {
+  //     const modIndex = percentageComp.indexOf('%');
+  //     if(modIndex === null || modIndex === 0) {
+  //       console.log('error detected');
+  //       break;
+  //     }
+  //     let percentString = percentageComp.slice(modIndex-2, modIndex);
+  //     const intPercentage = parseInt(percentString);
+  //     if(intPercentage >= biggestIntPercentage) 
+  //     {
+  //       const arrayX =[pAequor.specimenNum, speciman.specimenNum, intPercentage];
+  //       (intPercentage === biggestIntPercentage) ? most_related.push(arrayX) : 
+  //       (biggestIntPercentage = intPercentage, most_related.unshift(arrayX)); 
+  //     }
+  //   }
+  // }
+// }
 //console calls
-console.log(mostRelated());
+console.log(most_related);
+// console.log(mostRelated());
 //console.log(percentComp);
 console.log(specNum);
 console.log(survivalSpecimens.length);
