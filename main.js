@@ -132,7 +132,7 @@ const mostRelated = (index1=0) => {
   //Find largest match
   for(let i=index1; i<survivalSpecimens.length; i++) {
     for(let j=0; j<survivalSpecimens.length; j++) {
-      if(j===i){
+      if(j===i || j<i){
         continue;
       }
       specimenX = survivalSpecimens[i];
