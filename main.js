@@ -20,7 +20,7 @@ const pAequorFactory = (specimenNum, dna) => {
     dna,
     //specimen methods.
     mutate() {
-      const indexDnaBase = Math.floor(Math.random() * 14);
+      const indexDnaBase = Math.floor(Math.random() * this.dna.length);
       let randomDnaBase = this.dna[indexDnaBase];
       let newDnaBase = returnRandBase();
       while(newDnaBase === randomDnaBase) {
